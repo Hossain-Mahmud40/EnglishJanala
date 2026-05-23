@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Title and logo -->
     <title>English janala | Best platform for learning English</title>
-    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon" />
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -29,7 +29,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- StyleSheet -->
-    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
     <header>
@@ -166,7 +166,20 @@
         <h2 class="font-bold text-4xl">একটি Lesson Select করুন।</h2>
       </div>
     </section>
-
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="$$btn" onclick="my_modal_5.showModal()">open modal</button> -->
+    <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <div id="details-container" class="space-y-5"></div>
+        <!-- <p class="py-4">Press ESC key or click the button below to close</p> -->
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
     <script src="./script/index.js"></script>
   </body>
 </html>
