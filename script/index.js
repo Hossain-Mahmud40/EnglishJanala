@@ -1,3 +1,22 @@
+const createElements = (arr) => {
+  const htmlElements = arr.map((el) => `<span class="btn">${el}</span>`);
+  return htmlElements.join(" ");
+};
+
+const manageSpinner = (status) => {
+  const spinner = document.getElementById("spinner");
+  const wordContainer = document.getElementById("word-container");
+  if (!spinner || !wordContainer) return;
+
+  if (status === true) {
+    spinner.classList.remove("hidden");
+    wordContainer.classList.add("hidden");
+  } else {
+    wordContainer.classList.remove("hidden");
+    spinner.classList.add("hidden");
+  }
+};
+
 const loadLessons = () => {
   fetch("https://openapi.programming-hero.com/api/levels/all") // promise of response
     .then((res) => res.json()) // promise of json data
@@ -11,6 +30,7 @@ const removeActive = () => {
 };
 
 const loadLevelWord = (id) => {
+  manageSpinner(true);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -19,6 +39,9 @@ const loadLevelWord = (id) => {
       const clickBtn = document.getElementById(`lesson-btn-${id}`);
       clickBtn.classList.add("active");
       displayLevelWord(data.data);
+    })
+    .catch(() => {
+      manageSpinner(false);
     });
 };
 
@@ -49,9 +72,7 @@ const displayWordDetails = (word) => {
           </div>
           <div class="">
             <h2 class="font-bold">সমার্থক শব্দ গুলো</h2>
-            <span class="btn">Syn1</span>
-            <span class="btn">Syn2</span>
-            <span class="btn">Syn3</span>
+            <div class="">${createElements(word.synonyms)} </div>
           </div>
   `;
   document.getElementById("word_modal").showModal();
@@ -72,6 +93,7 @@ const displayLevelWord = (words) => {
         <h2 class="font-bold text-4xl">নেক্সট Lesson এ যান</h2>
       </div>
     `;
+    manageSpinner(false);
     return;
   }
   words.forEach((word) => {
@@ -95,6 +117,7 @@ const displayLevelWord = (words) => {
     `;
     wordContainer.append(card);
   });
+  manageSpinner(false);
 };
 
 const displayLessons = (lessons) => {
